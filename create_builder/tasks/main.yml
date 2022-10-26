@@ -47,7 +47,7 @@
   tags: up
   register: ec2_inst
 
--name: Wait for SSH port is ready
+- name: Wait for SSH port is ready
   wait_for:
     host: "{{ ec2.instances[0].public_dns_name }}"
     port: 22
