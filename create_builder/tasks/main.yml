@@ -49,7 +49,9 @@
 # destroy all
 - name: Get info of the instance
   ec2_instance_info:
-    names: "{{ project_name }}_{{ instance_name }}"
+    region: "{{ region }}"
+    filters:
+      "tag:Name": "{{ project_name }}_{{ instance_name }}"
   register: ec2_info
   tags: down
 
