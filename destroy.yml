@@ -5,7 +5,7 @@
 
   roles:
     - role: create_builder
-      tags: [up]
+      tags: [down]
 
 
 # - name: Test Builder

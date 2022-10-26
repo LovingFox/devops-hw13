@@ -1,5 +1,6 @@
 ---
 # tasks file for create_builder
+# create all
 - name: Create a security group
   ec2_group:
     name: "{{ project_name }}_{{ instance_name }}_security_group"
@@ -14,19 +15,22 @@
       - proto: all
         cidr_ip: 0.0.0.0/0
   register: ec2_sec
+  tag: up
 
 - name: Create an EC2 key
   ec2_key:
     name: "{{ project_name }}-{{ instance_name }}-key"
     region: "{{ region }}"
   register: ec2_key
+  tag: up
 
 - name: Save a private key
   copy:
     content: "{{ ec2_key.key.private_key }}"
-    dest: "../{{ instance_name }}-private.key"
+    dest: "{{ instance_name }}-private.key"
     mode: 0600
   when: ec2_key.changed
+  tag: up
 
 - name: Create an EC2 instance
   ec2:
@@ -40,3 +44,21 @@
     instance_tags:
       Name: "{{ project_name }}_{{ instance_name }}"
   when: ec2_key.changed
+  tag: up
+
+# destroy all
+- name: Get info of the instance
+  ec2_instance_info:
+    filters:
+      "tag:Name": "{{ project_name }}_{{ instance_name }}"
+  register: ec2_info
+
+- name: Print it
+  debug:
+    msg: "{{ec2_info}}"
+
+# - name: Destroy an EC2 instance
+#   ec2:
+#     instance_ids: '{{item}}'
+#     state: absent
+#   tag: down
