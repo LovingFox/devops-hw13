@@ -49,6 +49,7 @@
 
 - name: Refresh in-memory EC2 cache
   meta: refresh_inventory
+  tags: up
 
 
 # - name: Wait for SSH port is ready
