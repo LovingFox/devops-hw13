@@ -1,5 +1,6 @@
 ---
 # tasks file for create_builder
+######################################
 # create all
 - name: Create a security group
   ec2_group:
@@ -51,33 +52,23 @@
   meta: refresh_inventory
   tags: up
 
-
-# - name: Wait for SSH port is ready
-#   wait_for:
-#     host: "{{ item.public_dns_name }}"
-#     port: 22
-#     delay: 10
-#     timeout: 300
-#   loop: "{{ ec2_inst.instances }}"
-#   when: ec2_key.changed
-#   tags: up
-
-# - name: test
-#   debug:
-#     msg: "{{item.public_dns_name}}"
-#   when: ec2_key.changed
-#   loop: "{{ ec2_inst.instances }}"
-#   tags: up
-
-# destroy all
 - name: Get info of the instance
   ec2_instance_info:
     region: "{{ region }}"
     filters:
       "tag:Name": "{{ project_name }}_{{ instance_name }}"
   register: ec2_info
-  tags: down
+  tags: [up, down]
 
+- name: Set facts of the new instance
+  set_facts:
+    builder_hostname: '{{item.public_dns_name}}'
+  loop: "{{ ec2_info.instances }}"
+  when: ec2_info.changed
+  tags: up
+
+######################################
+# destroy all
 - name: Destroy the instance
   ec2:
     region: "{{ region }}"

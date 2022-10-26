@@ -11,4 +11,4 @@
   hosts: tag_Name_devops_hw13_builder
 
   roles:
-    - builder
+    - {role: builder, builder_hostname: "{{ builder_hostname }}"}
