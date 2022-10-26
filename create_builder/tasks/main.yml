@@ -55,18 +55,14 @@
   register: ec2_info
   tags: down
 
-# - name: Print it
-#   debug:
-#     msg: "{{item.instance_id}} - {{item.key_name}}"
-#   loop: "{{ ec2_info.instances }}"
-#   tags: down
-
 - name: Destroy the instance
   ec2:
     region: "{{ region }}"
-    instance_ids: '{{item.instance_id}}'
+    # instance_ids: '{{item.instance_id}}'
+    filters:
+      "tag:Name": "{{ project_name }}_{{ instance_name }}"
     state: absent
-  loop: "{{ ec2_info.instances }}"
+  # loop: "{{ ec2_info.instances }}"
   tags: down
 
 - name: Delete the security group
