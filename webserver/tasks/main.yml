@@ -6,23 +6,34 @@
     timeout: 600
   tags: up
 
-- name: Run Shell Command
-  command: uname -a
-  register: test
-  tags: up
+- name: Ensure tomcat package is present
+  apt:
+    name: tomcat9
+    state: present
+    update_cache: true
 
-- name: Show Output of Shell Command
-  debug:
-    msg: "{{test}}"
-  tags: up
+- name: Ensure tomcat is running
+  service:
+    name: tomcat9.service
+    state: started
 
-- name: Read builder hostname
-  delegate_to: localhost
-  set_fact:
-    builder_dns_name: "{{ lookup('file', hostname_file) }}"
-  tags: up
-
-- name: Show hostname
-  debug:
-    msg: "{{ builder_dns_name }}"
-  tags: up
+# - name: Run Shell Command
+#   command: uname -a
+#   register: test
+#   tags: up
+#
+# - name: Show Output of Shell Command
+#   debug:
+#     msg: "{{test}}"
+#   tags: up
+#
+# - name: Read builder hostname
+#   delegate_to: localhost
+#   set_fact:
+#     builder_dns_name: "{{ lookup('file', hostname_file) }}"
+#   tags: up
+#
+# - name: Show hostname
+#   debug:
+#     msg: "{{ builder_dns_name }}"
+#   tags: up

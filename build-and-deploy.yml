@@ -1,30 +1,30 @@
 ---
-- name: Create a Builder EC2 instance
-  hosts: localhost
-  gather_facts: false
-
-  roles:
-    - role: instance_builder
-
-# - name: Create a Webserver EC2 instance
+# - name: Create a Builder EC2 instance
 #   hosts: localhost
 #   gather_facts: false
 #
 #   roles:
-#     - role: instance_webserver
+#     - role: instance_builder
 
-- name: Test Builder
+- name: Create a Webserver EC2 instance
+  hosts: localhost
   gather_facts: false
-  hosts: tag_Name_devops_hw13_builder
-  become: true
 
   roles:
-    - role: builder
+    - role: instance_webserver
 
-# - name: Test Webserver
+# - name: Test Builder
 #   gather_facts: false
-#   hosts: tag_Name_devops_hw13_webserver
+#   hosts: tag_Name_devops_hw13_builder
 #   become: true
 #
 #   roles:
-#     - role: webserver
+#     - role: builder
+
+- name: Test Webserver
+  gather_facts: false
+  hosts: tag_Name_devops_hw13_webserver
+  become: true
+
+  roles:
+    - role: webserver

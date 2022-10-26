@@ -5,3 +5,7 @@ instance_name: webserver
 hostname_file: "{{ instance_name }}-hostname"
 ansible_ssh_private_key_file: "./{{ instance_name }}-private.key"
 ansible_ssh_user: ubuntu
+
+web_dir: "/var/lib/tomcat9/webapps"
+web_root_dir: "{{web_dir}}/ROOT"
+web_root_file: "{{web_dir}}/ROOT.war"
