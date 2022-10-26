@@ -68,3 +68,9 @@
     state: absent
   loop: "{{ ec2_info.instances }}"
   tags: down
+
+- name: Delete the security group
+  ec2_group:
+    name: "{{ project_name }}_{{ instance_name }}_security_group"
+    region: "{{ region }}"
+  tags: down
