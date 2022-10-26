@@ -1,4 +1,4 @@
-# devops-hw13 (!!! yet under development !!!)
+# devops-hw13
 
 ### Build and Depoly an application on AWS EC2 resources by Ansible
 
