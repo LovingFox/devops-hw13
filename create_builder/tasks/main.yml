@@ -74,7 +74,7 @@
 - name: Destroy the instance
   ec2:
     region: "{{ region }}"
-    instance_ids: '{{item.instance_id}}'
+    instance_ids: '{{ item.instance_id }}'
     state: absent
     wait: true
   loop: "{{ ec2_info.instances }}"
@@ -94,8 +94,11 @@
     state: absent
   tags: down
 
-- name: Delete the private key
+- name: Delete the private key and hostname file
   file:
-    path: "./{{ instance_name }}-private.key"
+    path: "{{ item }}"
     state: absent
+  loop:
+    - "./{{ instance_name }}-private.key"
+    - "./{{ instance_name }}-hostname"
   tags: down

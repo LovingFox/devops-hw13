@@ -19,7 +19,7 @@
 - name: Read builder hostname
   delegate_to: localhost
   set_fact:
-    builder_dns_name: "{{ lookup('file', 'builder-hostname') }}"
+    builder_dns_name: "{{ lookup('file', hostname_file) }}"
   tags: up
 
 - name: Show hostname
