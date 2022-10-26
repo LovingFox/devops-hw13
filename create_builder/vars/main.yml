@@ -1,0 +1,6 @@
+---
+# vars file for create_builder
+region: eu-central-1
+instance_type: t2.micro
+ami: ami-0caef02b518350c8b                      # Ubuntu 22.04
+keypair: devops-hw13-key

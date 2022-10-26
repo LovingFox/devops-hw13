@@ -1,0 +1,9 @@
+---
+# tasks file for builder
+- name: Run Shell Command
+  command: uname -a
+  register: test
+
+- name: Show Output of Shell Command
+  debug:
+    msg: "{{test}}"

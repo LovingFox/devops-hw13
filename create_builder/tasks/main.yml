@@ -1,0 +1,13 @@
+---
+# tasks file for create_builder
+- name: Create an ec2 instance
+  ec2:
+    key_name: "{{keypair}}"
+    group: EC2SecurityGroup-1
+    instance_type: "{{instance_type}}"
+    image: "{{ami}}"
+    wait: true
+    region: "{{region}}"
+    count: 1
+    instance_tags:
+      Name: devops_hw13_builder
