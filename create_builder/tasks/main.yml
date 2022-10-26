@@ -58,11 +58,9 @@
 - name: Destroy the instance
   ec2:
     region: "{{ region }}"
-    # instance_ids: '{{item.instance_id}}'
-    filters:
-      "tag:Name": "{{ project_name }}_{{ instance_name }}"
+    instance_ids: '{{item.instance_id}}'
     state: absent
-  # loop: "{{ ec2_info.instances }}"
+  loop: "{{ ec2_info.instances }}"
   tags: down
 
 - name: Delete the security group
@@ -76,5 +74,11 @@
   ec2_key:
     region: "{{ region }}"
     name: "{{ project_name }}-{{ instance_name }}-key"
+    state: absent
+  tags: down
+
+- name: Delete the private key
+  file:
+    path: "{{ instance_name }}-private.key"
     state: absent
   tags: down
