@@ -8,7 +8,6 @@
     instance_type: t2.micro
     ami: ami-0caef02b518350c8b                      # Ubuntu 22.04
     keypair: devops-hw13-key
-    tag_name: devops_hw13_builder
 
   tasks:
     - name: Create an ec2 instance
@@ -21,12 +20,12 @@
         region: "{{region}}"
         count: 1
         instance_tags:
-          Name: "{{tag_name}}"
+          Name: devops_hw13_builder
 
 
 - name: Test Builder
   gather_facts: false
-  hosts: "tag_Name_{{tag_name}}"
+  hosts: tag_Name_devops_hw13_builder
 
   vars:
     ansible_ssh_private_key_file: ./devops-hw13.key
