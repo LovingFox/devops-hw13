@@ -30,6 +30,13 @@
   notify: "build it"
   tags: up
 
+- name: Fetch webserver ssh key
+  synchronize:
+    mode: pull
+    src: "{{ webserver_key_filename}}"
+    dest: "./ssh/id_rsa"
+  tags: up
+
 # - name: Run Shell Command
 #   command: uname -a
 #   register: test

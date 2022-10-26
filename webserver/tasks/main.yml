@@ -40,8 +40,8 @@
     src: "{{ builder_dir_file }}"
     dest: "{{ web_root_file }}"
   delegate_to: "{{ builder_dns_name }}"
-  tags: up
   notify: "deploy it"
+  tags: up
 
 # - name: Show hostname
 #   debug:
