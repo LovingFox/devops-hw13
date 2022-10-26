@@ -12,4 +12,4 @@ web_root_file: "{{web_dir}}/ROOT.war"
 
 builder_hostname_file: "builder-hostname"
 builder_dir: "/root/boxfuse"
-builder_dir_file: "{{ repo_dir }}/target/hello-1.0.war"
+builder_dir_file: "{{ builder_dir }}/target/hello-1.0.war"
