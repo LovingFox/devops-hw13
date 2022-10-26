@@ -48,9 +48,8 @@
 
 # destroy all
 - name: Get info of the instance
-  ec2_instance_info:
-    filters:
-      "tags:Name": "{{ project_name }}_{{ instance_name }}"
+  ec2_remote_facts:
+    names: "{{ project_name }}_{{ instance_name }}"
   register: ec2_info
   tags: down
 
