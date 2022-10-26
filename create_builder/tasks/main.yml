@@ -57,10 +57,11 @@
 
 - name: Print it
   debug:
-    msg: "{{ec2_info}}"
+    msg: "{{item.instance_id}} - {{item.instance_name}}"
+  loop: "{{ ec2_info.instances }}"
   tags: down
 
-# - name: Destroy an EC2 instance
+# - name: Destroy the instance
 #   ec2:
 #     instance_ids: '{{item}}'
 #     state: absent
