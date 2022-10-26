@@ -32,8 +32,8 @@ Simple Tomcat application based on the test project:
 1. Set AWS credentials
 
     ```bash
-    export AWS_ACCESS_KEY=<your AWS access key>
-    export AWS_SECRET_KEY=<your AWS secret key>
+    export AWS_ACCESS_KEY="<your AWS access key>"
+    export AWS_SECRET_KEY="<your AWS secret key>"
     ```
 
 1. Launch the application
