@@ -65,7 +65,6 @@
   set_fact:
     b_hostname: '{{item.public_dns_name}}'
   loop: "{{ ec2_info.instances }}"
-  when: ec2_info.changed
   tags: up
 
 ######################################
