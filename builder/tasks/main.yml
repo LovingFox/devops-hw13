@@ -15,6 +15,7 @@
     - default-jre
     - maven
     - git
+  tags: up
 
 - name: Clone a github repository boxfuse
   git:
@@ -23,6 +24,7 @@
     clone: true
     update: true
   notify: "build it"
+  tags: up
 
 - name: Check the artifact exists
   stat:
@@ -30,6 +32,7 @@
   register: artifact_file
   changed_when: not artifact_file.stat.exists
   notify: "build it"
+  tags: up
 
 # - name: Run Shell Command
 #   command: uname -a
