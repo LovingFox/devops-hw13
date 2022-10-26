@@ -24,7 +24,7 @@
   register: ec2_key
   tags: up
 
-- name: Save a private key
+- name: Save the private key
   copy:
     content: "{{ ec2_key.key.private_key }}"
     dest: "./{{ instance_name }}-private.key"
@@ -56,6 +56,7 @@
 - name: test
   debug:
     msg: "{{ec2_host.public_dns_name}}"
+  tags: up
 
 # destroy all
 - name: Get info of the instance
