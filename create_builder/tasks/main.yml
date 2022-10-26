@@ -47,12 +47,15 @@
   tags: up
   register: ec2_inst
 
-- name: Wait for SSH port is ready
-  wait_for:
-    host: "{{ ec2_host.public_dns_name }}"
-    port: 22
-    delay: 10
-    timeout: 300
+# - name: Wait for SSH port is ready
+#   wait_for:
+#     host: "{{ ec2_host.public_dns_name }}"
+#     port: 22
+#     delay: 10
+#     timeout: 300
+- name: test
+  debug:
+    msg: "{{ec2_host.public_dns_name}}"
 
 # destroy all
 - name: Get info of the instance
