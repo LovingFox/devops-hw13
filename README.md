@@ -14,7 +14,7 @@ Simple Tomcat application based on the test project:
 1. *instance_builder/* (Ansible role for EC2 Builder instance creation/removing)
 1. *instance_webserver/* (Ansible role for EC2 Webserver instance creation/removing)
 1. *builder/* (Ansible role for Builder vm)
-1. *webserver/* (Ansible role for Builder vm)
+1. *webserver/* (Ansible role for Webserver vm)
 
 ##### Usage
 
