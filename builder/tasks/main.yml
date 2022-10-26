@@ -16,7 +16,11 @@
     msg: "{{test}}"
   tags: up
 
+- name: Import role from create_builder
+  import_role:
+    name: create_builder
+
 - name: Show hostname
   debug:
-    msg: "{{ builder_hostname }}"
+    msg: "{{ builder_dns_name }}"
   tags: up

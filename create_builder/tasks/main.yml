@@ -63,7 +63,7 @@
 
 - name: Set facts of the new instance
   set_fact:
-    builder_dns_name: '{{item.public_dns_name}}'
+    builder_dns_name: '{{ item.public_dns_name }}'
   loop: "{{ ec2_info.instances }}"
   when: ec2_info is succeeded
   tags: up
