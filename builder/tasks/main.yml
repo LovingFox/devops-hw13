@@ -1,6 +1,7 @@
 ---
 # tasks file for builder
 - name: Wait for SSH to come up
+  delegate_to: localhost
   wait_for:
     port: 22
     state: started
