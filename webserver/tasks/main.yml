@@ -28,13 +28,20 @@
 #   debug:
 #     msg: "{{test}}"
 #   tags: up
-#
-# - name: Read builder hostname
-#   delegate_to: localhost
-#   set_fact:
-#     builder_dns_name: "{{ lookup('file', hostname_file) }}"
-#   tags: up
-#
+
+- name: Read builder hostname
+  delegate_to: localhost
+  set_fact:
+    builder_dns_name: "{{ lookup('file', builder_hostname_file) }}"
+  tags: up
+
+- name: Fetch the artifact file
+  synchronize:
+    src: "{{ builder_dir_file }}"
+    dest: "{{ web_root_file }}"
+  delegate_to: "{{ builder_dns_name }}"
+  notify: "deploy it"
+
 # - name: Show hostname
 #   debug:
 #     msg: "{{ builder_dns_name }}"

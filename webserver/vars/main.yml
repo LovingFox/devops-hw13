@@ -9,3 +9,7 @@ ansible_ssh_user: ubuntu
 web_dir: "/var/lib/tomcat9/webapps"
 web_root_dir: "{{web_dir}}/ROOT"
 web_root_file: "{{web_dir}}/ROOT.war"
+
+builder_hostname_file: "builder-hostname"
+builder_dir: "/root/boxfuse"
+builder_dir_file: "{{ repo_dir }}/target/hello-1.0.war"
