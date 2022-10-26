@@ -26,7 +26,7 @@
 
 - name: Test Builder
   gather_facts: false
-  hosts: "tag_Name_{{name}}"
+  hosts: "tag_Name_{{tag_name}}"
 
   vars:
     ansible_ssh_private_key_file: ./devops-hw13.key
