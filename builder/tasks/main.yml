@@ -16,9 +16,11 @@
     msg: "{{test}}"
   tags: up
 
-- name: Import role from create_builder
-  import_role:
-    name: create_builder
+- name: Read builder hostname
+  delegate_to: localhost
+  set_fact:
+    builder_dns_name: "{{ lookup('file', 'builder-hostname') }}"
+
 
 - name: Show hostname
   debug:

@@ -61,9 +61,10 @@
   register: ec2_info
   tags: [up, down]
 
-- name: Set facts of the new instance
-  set_fact:
-    builder_dns_name: '{{ item.public_dns_name }}'
+- name: Save hostname of the builder
+  copy:
+    content: "{{ item.public_dns_name }}"
+    dest: "./{{ instance_name }}-hostname"
   loop: "{{ ec2_info.instances }}"
   when: ec2_info is succeeded
   tags: up
