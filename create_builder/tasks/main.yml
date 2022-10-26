@@ -55,9 +55,9 @@
 - name: Get info of the instance
   ec2_instance_info:
     region: "{{ region }}"
-    instance-state-name: running
     filters:
       "tag:Name": "{{ project_name }}_{{ instance_name }}"
+      instance-state-name: running
     when: not ec2_info.changed
   register: ec2_info
   tags: [up, down]
