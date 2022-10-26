@@ -19,16 +19,6 @@
     state: started
   tags: up
 
-# - name: Run Shell Command
-#   command: uname -a
-#   register: test
-#   tags: up
-#
-# - name: Show Output of Shell Command
-#   debug:
-#     msg: "{{test}}"
-#   tags: up
-
 - name: Read builder hostname
   delegate_to: localhost
   set_fact:
@@ -42,8 +32,3 @@
   delegate_to: "{{ builder_dns_name }}"
   notify: "deploy it"
   tags: up
-
-# - name: Show hostname
-#   debug:
-#     msg: "{{ builder_dns_name }}"
-#   tags: up

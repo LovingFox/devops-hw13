@@ -30,36 +30,8 @@
   notify: "build it"
   tags: up
 
-# - name: Create .ssh dir
-#   file:
-#     path: "./.ssh/id_rsa"
-#     state: directory
-#     mode: '0755'
-#   tags: up
-
 - name: Fetch webserver ssh key
   synchronize:
     src: "{{ webserver_key_filename }}"
     dest: "{{ webserver_key_filename }}"
   tags: up
-
-# - name: Run Shell Command
-#   command: uname -a
-#   register: test
-#   tags: up
-#
-# - name: Show Output of Shell Command
-#   debug:
-#     msg: "{{test}}"
-#   tags: up
-#
-# - name: Read builder hostname
-#   delegate_to: localhost
-#   set_fact:
-#     builder_dns_name: "{{ lookup('file', hostname_file) }}"
-#   tags: up
-#
-# - name: Show hostname
-#   debug:
-#     msg: "{{ builder_dns_name }}"
-#   tags: up

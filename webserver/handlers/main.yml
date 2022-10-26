@@ -1,12 +1,5 @@
 ---
 # handlers file for webserver
-# - name: Install new artifact
-#   synchronize:
-#     mode: push
-#     src: "{{ archive_file }}"
-#     dest: "{{ web_root_file }}"
-#   listen: "deploy it"
-
 - name: Delete old artifact directory
   file:
     path: "{{ web_root_dir }}"
