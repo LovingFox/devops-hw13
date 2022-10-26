@@ -56,6 +56,7 @@
 - name: test
   debug:
     msg: "{{ec2_host.public_dns_name}}"
+  when: ec2_key.changed
   tags: up
 
 # destroy all
