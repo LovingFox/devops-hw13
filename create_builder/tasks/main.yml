@@ -45,6 +45,14 @@
       Name: "{{ project_name }}_{{ instance_name }}"
   when: ec2_key.changed
   tags: up
+  register: ec2_inst
+
+-name: Wait for SSH port is ready
+  wait_for:
+    host: "{{ ec2.instances[0].public_dns_name }}"
+    port: 22
+    delay: 10
+    timeout: 300
 
 # destroy all
 - name: Get info of the instance
