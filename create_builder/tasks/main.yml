@@ -47,14 +47,19 @@
   tags: up
   register: ec2_inst
 
-- name: Wait for SSH port is ready
-  wait_for:
-    host: "{{ item.public_dns_name }}"
-    port: 22
-    delay: 10
-    timeout: 300
-  loop: "{{ ec2_inst.instances }}"
-  tags: up
+- name: Refresh in-memory EC2 cache
+  meta: refresh_inventory
+
+
+# - name: Wait for SSH port is ready
+#   wait_for:
+#     host: "{{ item.public_dns_name }}"
+#     port: 22
+#     delay: 10
+#     timeout: 300
+#   loop: "{{ ec2_inst.instances }}"
+#   when: ec2_key.changed
+#   tags: up
 
 # - name: test
 #   debug:
