@@ -55,8 +55,9 @@
 #     timeout: 300
 - name: test
   debug:
-    msg: "{{ec2_inst}}"
+    msg: "{{item.public_dns_name}}"
   when: ec2_key.changed
+  loop: "{{ ec2_inst.instances }}"
   tags: up
 
 # destroy all
