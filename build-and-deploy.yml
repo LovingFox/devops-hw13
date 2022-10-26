@@ -13,19 +13,19 @@
   tasks:
     - name: Create an ec2 instance
       ec2:
-        key_name: {{keypair}}
+        key_name: "{{keypair}}"
         group: EC2SecurityGroup-1
-        instance_type: {{instance_type}}
-        image: {{ami}}
+        instance_type: "{{instance_type}}"
+        image: "{{ami}}"
         wait: true
-        region: {{region}}
+        region: "{{region}}"
         count: 1
         instance_tags:
-          Name: {{name}}
+          Name: "{{name}}"
         assign_public_ip: true
 
 
-- name: Test iBuilder
+- name: Test Builder
   gather_facts: false
   hosts: "tag_Name_{{name}}"
   vars:
