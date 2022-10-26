@@ -55,14 +55,15 @@
   register: ec2_info
   tags: down
 
-- name: Print it
-  debug:
-    msg: "{{item.instance_id}} - {{item.key_name}}"
+# - name: Print it
+#   debug:
+#     msg: "{{item.instance_id}} - {{item.key_name}}"
+#   loop: "{{ ec2_info.instances }}"
+#   tags: down
+
+- name: Destroy the instance
+  ec2:
+    instance_ids: '{{item.instance_id}}'
+    state: absent
   loop: "{{ ec2_info.instances }}"
   tags: down
-
-# - name: Destroy the instance
-#   ec2:
-#     instance_ids: '{{item}}'
-#     state: absent
-#   tags: down
