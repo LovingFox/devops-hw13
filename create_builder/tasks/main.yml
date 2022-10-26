@@ -75,3 +75,10 @@
     name: "{{ project_name }}_{{ instance_name }}_security_group"
     state: absent
   tags: down
+
+- name: Delete the EC2 key
+  ec2_key:
+    region: "{{ region }}"
+    name: "{{ project_name }}-{{ instance_name }}-key"
+    state: absent
+  tags: down
