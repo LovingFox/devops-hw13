@@ -20,7 +20,7 @@
   delegate_to: localhost
   set_fact:
     builder_dns_name: "{{ lookup('file', 'builder-hostname') }}"
-
+  tags: up
 
 - name: Show hostname
   debug:
