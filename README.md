@@ -30,8 +30,14 @@ Simple Tomcat application based on the test project:
     export AWS_SECRET_KEY="<your AWS secret key>"
     ```
 
-1. Launch the ....
+1. Start the ....
 
     ```bash
     ansible-playbook build-and-deploy.yml --tags up
+    ```
+
+1. Destroy the ....
+
+    ```bash
+    ansible-playbook build-and-deploy.yml --tags down
     ```

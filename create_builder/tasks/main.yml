@@ -27,7 +27,7 @@
 - name: Save a private key
   copy:
     content: "{{ ec2_key.key.private_key }}"
-    dest: "{{ instance_name }}-private.key"
+    dest: "./{{ instance_name }}-private.key"
     mode: 0600
   when: ec2_key.changed
   tags: up
@@ -79,6 +79,6 @@
 
 - name: Delete the private key
   file:
-    path: "{{ instance_name }}-private.key"
+    path: "./{{ instance_name }}-private.key"
     state: absent
   tags: down
