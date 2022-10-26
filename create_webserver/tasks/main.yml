@@ -1,0 +1,108 @@
+---
+# tasks file for create_webserver
+######################################
+# create all
+- name: Create a security group
+  ec2_group:
+    name: "{{ project_name }}_{{ instance_name }}_security_group"
+    description: "{{ project_name }} {{ instance_name }} security group"
+    region: "{{ region }}"
+    rules:
+      - proto: tcp  # ssh
+        from_port: 22
+        to_port: 22
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp  # http
+        from_port: 8080
+        to_port: 8080
+        cidr_ip: 0.0.0.0/0
+    rules_egress:
+      - proto: all
+        cidr_ip: 0.0.0.0/0
+  register: ec2_sec
+  tags: up
+
+- name: Create an EC2 key
+  ec2_key:
+    name: "{{ project_name }}-{{ instance_name }}-key"
+    region: "{{ region }}"
+  register: ec2_key
+  tags: up
+
+- name: Save the private key
+  copy:
+    content: "{{ ec2_key.key.private_key }}"
+    dest: "./{{ instance_name }}-private.key"
+    mode: 0600
+  when: ec2_key.changed
+  tags: up
+
+- name: Create an EC2 instance
+  ec2:
+    key_name: "{{ ec2_key.key.name }}"
+    group_id: "{{ ec2_sec.group_id }}"
+    instance_type: "{{ instance_type }}"
+    image: "{{ ami }}"
+    wait: true
+    region: "{{ region }}"
+    count: 1
+    instance_tags:
+      Name: "{{ project_name }}_{{ instance_name }}"
+  when: ec2_key.changed
+  register: ec2_inst
+  tags: up
+
+- name: Refresh in-memory EC2 cache
+  meta: refresh_inventory
+  tags: up
+
+- name: Get info of the instance
+  ec2_instance_info:
+    region: "{{ region }}"
+    filters:
+      "tag:Name": "{{ project_name }}_{{ instance_name }}"
+      instance-state-name: running
+  register: ec2_info
+  tags: [up, down]
+
+- name: Save hostname of the builder
+  copy:
+    content: "{{ item.public_dns_name }}"
+    dest: "./{{ instance_name }}-hostname"
+  loop: "{{ ec2_info.instances }}"
+  when: ec2_info is succeeded
+  tags: up
+
+######################################
+# destroy all
+- name: Destroy the instance
+  ec2:
+    region: "{{ region }}"
+    instance_ids: '{{ item.instance_id }}'
+    state: absent
+    wait: true
+  loop: "{{ ec2_info.instances }}"
+  tags: down
+
+- name: Delete the security group
+  ec2_group:
+    region: "{{ region }}"
+    name: "{{ project_name }}_{{ instance_name }}_security_group"
+    state: absent
+  tags: down
+
+- name: Delete the EC2 key
+  ec2_key:
+    region: "{{ region }}"
+    name: "{{ project_name }}-{{ instance_name }}-key"
+    state: absent
+  tags: down
+
+- name: Delete the private key and hostname file
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "./{{ instance_name }}-private.key"
+    - "./{{ instance_name }}-hostname"
+  tags: down

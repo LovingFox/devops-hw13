@@ -6,6 +6,13 @@
   roles:
     - role: create_builder
 
+- name: Create a Webserver EC2 instance
+  hosts: localhost
+  gather_facts: false
+
+  roles:
+    - role: create_webserver
+
 - name: Test Builder
   gather_facts: false
   hosts: tag_Name_devops_hw13_builder

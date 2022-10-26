@@ -1,0 +1,7 @@
+---
+# vars file for create_webserver
+project_name: devops-hw13
+instance_name: webserver
+instance_type: t2.micro
+region: eu-central-1
+ami: ami-0caef02b518350c8b  # Ubuntu 22.04
