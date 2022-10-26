@@ -1,11 +1,9 @@
 ---
 # tasks file for builder
 - name: Wait for SSH to come up
-  local_action:
-    wait_for:
-      port: 22
-      state: started
-      hoat: "{{inventory_hostname}}"
+  wait_for_connection:
+    delay: 10
+    timeout: 600
 
 - name: Run Shell Command
   command: uname -a
