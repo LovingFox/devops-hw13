@@ -1,2 +1,13 @@
 ---
 # handlers file for builder
+- name: Clean maven project directory
+  shell:
+    chdir: "{{ repo_dir }}"
+    cmd: mvn clean
+  listen: "build it"
+
+- name: Build an artifact by maven
+  shell:
+    chdir: "{{ repo_dir }}"
+    cmd: mvn package
+  listen: "build it"

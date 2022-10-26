@@ -16,6 +16,7 @@
 - name: Test Builder
   gather_facts: false
   hosts: tag_Name_devops_hw13_builder
+  become: true
 
   roles:
     - role: builder
@@ -23,6 +24,7 @@
 - name: Test Webserver
   gather_facts: false
   hosts: tag_Name_devops_hw13_webserver
+  become: true
 
   roles:
     - role: webserver

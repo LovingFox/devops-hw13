@@ -6,23 +6,48 @@
     timeout: 600
   tags: up
 
-- name: Run Shell Command
-  command: uname -a
-  register: test
-  tags: up
+- name: Ensure packages are present
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  with_items:
+    - default-jre
+    - maven
+    - git
 
-- name: Show Output of Shell Command
-  debug:
-    msg: "{{test}}"
-  tags: up
+- name: Clone a github repository boxfuse
+  git:
+    repo: "{{ remote_repo }}"
+    dest: "{{ repo_dir }}"
+    clone: true
+    update: true
+  notify: "build it"
 
-- name: Read builder hostname
-  delegate_to: localhost
-  set_fact:
-    builder_dns_name: "{{ lookup('file', hostname_file) }}"
-  tags: up
+- name: Check the artifact exists
+  stat:
+    path: "{{ target_file }}"
+  register: artifact_file
+  changed_when: not artifact_file.stat.exists
+  notify: "build it"
 
-- name: Show hostname
-  debug:
-    msg: "{{ builder_dns_name }}"
-  tags: up
+# - name: Run Shell Command
+#   command: uname -a
+#   register: test
+#   tags: up
+#
+# - name: Show Output of Shell Command
+#   debug:
+#     msg: "{{test}}"
+#   tags: up
+#
+# - name: Read builder hostname
+#   delegate_to: localhost
+#   set_fact:
+#     builder_dns_name: "{{ lookup('file', hostname_file) }}"
+#   tags: up
+#
+# - name: Show hostname
+#   debug:
+#     msg: "{{ builder_dns_name }}"
+#   tags: up
