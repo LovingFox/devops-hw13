@@ -84,7 +84,7 @@
     region: "{{ region }}"
     instance_ids: '{{item.instance_id}}'
     state: absent
-    wait: yes
+    wait: true
   loop: "{{ ec2_info.instances }}"
   tags: down
 
