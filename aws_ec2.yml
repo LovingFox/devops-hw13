@@ -1,11 +1,11 @@
 ---
 plugin: aws_ec2
 
-aws_access_key: "{{ lookup('env','AWS_ACCESS_KEY') }}"
-aws_secret_key: "{{ lookup('env','AWS_SECRET_KEY') }}"
+aws_access_key: "{{ access_key }}"
+aws_secret_key: "{{ secret_key }}"
 
 regions:
-  - eu-central-1
+  - "{{ region }}"
 
 keyed_groups:
   - key: tags
