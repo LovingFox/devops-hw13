@@ -49,7 +49,6 @@
 
 - name: Refresh in-memory EC2 cache
   meta: refresh_inventory
-  when: ec2_inst.changed
   tags: up
 
 
