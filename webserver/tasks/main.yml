@@ -32,3 +32,8 @@
   delegate_to: "{{ builder_dns_name }}"
   notify: "deploy it"
   tags: up
+
+- name: Show url
+  debug:
+    msg: "Use this url: http://{{ inventory_hostname }}:8080"
+  tags: up
