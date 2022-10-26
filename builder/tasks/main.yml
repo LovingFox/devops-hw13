@@ -8,13 +8,9 @@
 
 - name: Ensure packages are present
   apt:
-    name: "{{ item }}"
+    name: ['default-jre', 'maven', 'git']
     state: present
     update_cache: true
-  with_items:
-    - default-jre
-    - maven
-    - git
   tags: up
 
 - name: Clone a github repository boxfuse
