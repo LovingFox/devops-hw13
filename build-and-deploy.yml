@@ -38,4 +38,4 @@
 
     - name: Show Output of Shell Command
       debug:
-        msg: {{test}}
+        msg: "{{test}}"
