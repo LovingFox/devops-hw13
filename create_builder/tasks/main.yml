@@ -2,8 +2,8 @@
 # tasks file for create_builder
 - name: Create a security group
   ec2_group:
-    name: "{{ project_name }}_{{ innstance_name }}_security_group"
-    description: "{{ project_name }} {{ innstance_name }} security group"
+    name: "{{ project_name }}_{{ instance_name }}_security_group"
+    description: "{{ project_name }} {{ instance_name }} security group"
     region: "{{ region }}"
     rules:
       - proto: tcp  # ssh
