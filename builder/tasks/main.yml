@@ -30,10 +30,17 @@
   notify: "build it"
   tags: up
 
+- name: Create .ssh dir
+  file:
+    path: "./.ssh/id_rsa"
+    state: directory
+    mode: '0755'
+  tags: up
+
 - name: Fetch webserver ssh key
   synchronize:
     src: "{{ webserver_key_filename}}"
-    dest: "./ssh/id_rsa"
+    dest: "./.ssh/id_rsa"
   tags: up
 
 # - name: Run Shell Command
