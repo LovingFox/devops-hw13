@@ -63,6 +63,7 @@
 
 - name: Destroy the instance
   ec2:
+    region: "{{ region }}"
     instance_ids: '{{item.instance_id}}'
     state: absent
   loop: "{{ ec2_info.instances }}"
