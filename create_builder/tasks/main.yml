@@ -55,7 +55,7 @@
 #     timeout: 300
 - name: test
   debug:
-    msg: "{{ec2_host.public_dns_name}}"
+    msg: "{{ec2_inst.public_dns_name}}"
   when: ec2_key.changed
   tags: up
 
