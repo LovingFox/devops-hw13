@@ -6,9 +6,9 @@
   roles:
     - role: create_builder
 
-# - name: Test Builder
-#   gather_facts: false
-#   hosts: tag_Name_devops_hw13_builder
-#
-#   roles:
-#     - builder
+- name: Test Builder
+  gather_facts: false
+  hosts: tag_Name_devops_hw13_builder
+
+  roles:
+    - builder

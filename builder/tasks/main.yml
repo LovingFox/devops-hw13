@@ -3,7 +3,9 @@
 - name: Run Shell Command
   command: uname -a
   register: test
+  tags: up
 
 - name: Show Output of Shell Command
   debug:
     msg: "{{test}}"
+  tags: up
