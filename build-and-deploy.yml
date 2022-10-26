@@ -5,8 +5,6 @@
 
   roles:
     - role: create_builder
-      tags: [up]
-
 
 # - name: Test Builder
 #   gather_facts: false
