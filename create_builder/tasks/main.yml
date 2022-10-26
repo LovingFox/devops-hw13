@@ -71,6 +71,7 @@
 
 - name: Delete the security group
   ec2_group:
-    name: "{{ project_name }}_{{ instance_name }}_security_group"
     region: "{{ region }}"
+    name: "{{ project_name }}_{{ instance_name }}_security_group"
+    state: absent
   tags: down
