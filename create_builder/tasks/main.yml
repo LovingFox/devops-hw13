@@ -57,7 +57,7 @@
 
 - name: Print it
   debug:
-    msg: "{{item.instance_id}} - {{item.instance_name}}"
+    msg: "{{item.instance_id}} - {{item.key_name}}"
   loop: "{{ ec2_info.instances }}"
   tags: down
 
