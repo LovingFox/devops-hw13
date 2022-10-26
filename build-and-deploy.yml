@@ -19,3 +19,10 @@
 
   roles:
     - role: builder
+
+- name: Test Webserver
+  gather_facts: false
+  hosts: tag_Name_devops_hw13_webserver
+
+  roles:
+    - role: webserver
