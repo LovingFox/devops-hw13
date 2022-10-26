@@ -15,14 +15,14 @@
       - proto: all
         cidr_ip: 0.0.0.0/0
   register: ec2_sec
-  tag: up
+  tags: up
 
 - name: Create an EC2 key
   ec2_key:
     name: "{{ project_name }}-{{ instance_name }}-key"
     region: "{{ region }}"
   register: ec2_key
-  tag: up
+  tags: up
 
 - name: Save a private key
   copy:
@@ -30,7 +30,7 @@
     dest: "{{ instance_name }}-private.key"
     mode: 0600
   when: ec2_key.changed
-  tag: up
+  tags: up
 
 - name: Create an EC2 instance
   ec2:
@@ -44,21 +44,23 @@
     instance_tags:
       Name: "{{ project_name }}_{{ instance_name }}"
   when: ec2_key.changed
-  tag: up
+  tags: up
 
 # destroy all
 - name: Get info of the instance
   ec2_instance_info:
     filters:
-      "tag:Name": "{{ project_name }}_{{ instance_name }}"
+      "tags:Name": "{{ project_name }}_{{ instance_name }}"
   register: ec2_info
+  tags: down
 
 - name: Print it
   debug:
     msg: "{{ec2_info}}"
+  tags: down
 
 # - name: Destroy an EC2 instance
 #   ec2:
 #     instance_ids: '{{item}}'
 #     state: absent
-#   tag: down
+#   tags: down

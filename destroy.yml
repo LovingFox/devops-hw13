@@ -1,5 +1,5 @@
 ---
-- name: Create a Builder EC2 instance
+- name: Destroy the Builder EC2 instance
   hosts: localhost
   gather_facts: false
 
